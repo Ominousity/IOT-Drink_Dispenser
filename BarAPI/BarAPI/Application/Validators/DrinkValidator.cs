@@ -14,7 +14,6 @@ namespace Application.Validators
         {
             RuleFor(x => x.Name).NotEmpty();
             RuleFor(x => x.AlcCL).GreaterThan(0.5f);
-            RuleFor(x => x.SodaCL).GreaterThan(0.5f);
         }
     }
 }
