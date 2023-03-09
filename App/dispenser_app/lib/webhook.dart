@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+
 class Webhook {
 
   Future<void> SendDrink(String name, String alcCl) async {
@@ -13,17 +14,17 @@ class Webhook {
       soda = "$cupVolume";
     }
     final response = await http.post(
-      Uri.parse('http://192.168.69.181:7150/api/Tester/test'),
+      Uri.parse('https://10.0.2.2:7150/api/Tester/test'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
+      body: jsonEncode(<String, dynamic>{
         'name': name,
-        'alcohol': alcCl,
-        'soda': soda,
+        'alcCl': double.parse(alcCl),
+        'sodaCl': double.parse(soda),
       }),
     );
-
+    print(alcCl);
     print(response.statusCode);
   } 
 }
