@@ -147,7 +147,7 @@ void OfllineDespenseCode(void * parameter){
 
 void testDrinkDespenser(){
   digitalWrite(greenLight, LOW);
-  if (value1 <= 0.4 || value2 <= 0.4){
+  if (value1 <= 0.4){
     for (int i = 0; i <= 7; i++) {
       digitalWrite(yellowLight, HIGH);
       delay(250);
@@ -156,7 +156,17 @@ void testDrinkDespenser(){
       delay(250);
       digitalWrite(redLight, LOW);      
     }
-  } else{
+  }
+  else if(value2 == 0){
+    digitalWrite(yellowLight, HIGH);
+    Serial.println("on");
+    digitalWrite(pump1, LOW);
+    delay(value1 * 1000);
+    digitalWrite(pump1, HIGH);
+    digitalWrite(greenLight, HIGH);
+    digitalWrite(yellowLight, LOW);      
+  }
+  else{
     digitalWrite(yellowLight, HIGH);
     Serial.println("on");
     digitalWrite(pump1, LOW);
