@@ -19,9 +19,8 @@ namespace BarAPI.Controllers
 
         [HttpPost]
         [Route("test")]
-        public ActionResult TestDespenseDrink(drink drink)
-        {
-            Console.WriteLine(drink);
+        public ActionResult TestDespenseDrink(drink drink) {
+
             try
             {
                 _drinkService.DespenseDrink(drink);
