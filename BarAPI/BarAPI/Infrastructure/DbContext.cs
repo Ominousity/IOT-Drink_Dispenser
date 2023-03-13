@@ -12,7 +12,9 @@ namespace Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder_)
         {
-
+            modelBuilder_.Entity<drink>()
+                .Property(u => u.Id)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<drink> _drinkEntries { get; set; }

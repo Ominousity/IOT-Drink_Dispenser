@@ -9,6 +9,7 @@ namespace Infrastructure.DependencyResolver
         public static void RegisterInfrastructureLayer(IServiceCollection services_)
         {
             services_.AddScoped<IDrinkRepository, DrinkRepository>();
+            services_.AddScoped<IDbRepository, DbRepository>();
         }
     }
 }

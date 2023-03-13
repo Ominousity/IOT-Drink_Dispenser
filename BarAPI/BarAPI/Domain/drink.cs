@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public int Amount { get; set; }
         public float SodaCL { get; set; }
         public float AlcCL { get; set; }
     }

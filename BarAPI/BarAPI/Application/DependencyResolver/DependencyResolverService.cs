@@ -13,6 +13,7 @@ namespace Application.DependencyResolver
         public static void RegisterApplicationLayer(IServiceCollection services_)
         {
             services_.AddScoped<IDrinkService, DrinkService>();
+            services_.AddScoped<IDbService, DbService>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MQTTnet;
 using MQTTnet.Client;
 using Newtonsoft.Json;
@@ -47,7 +48,53 @@ namespace Infrastructure
                 Console.WriteLine("Message has been sendt");
             }
 
-            //TODO Save How many Drinks have been despense
+            if (FindDrinkInDatabase(drink.Name))
+            {
+                UpdateDrink(drink);
+            }
+            else
+            {
+                CreateDrinkInDatabase(drink);
+            }
         }
+
+        #region Database Functions
+        private void CreateDrinkInDatabase(drink drink)
+        {
+            using (var context = new DbContext(_options, ServiceLifetime.Transient))
+            {
+                _ = context._drinkEntries.Add(drink) ?? throw new ArgumentException("Failed to create drink");
+                context.SaveChanges();
+            }
+        }
+
+        private void UpdateDrink(drink drink_)
+        {
+            using (var context = new DbContext(_options, ServiceLifetime.Scoped))
+            {
+                drink drinkToUpdate = context._drinkEntries.Where(x => x.Name == drink_.Name).ToList().FirstOrDefault() ?? throw new KeyNotFoundException("Could not find User");
+                drinkToUpdate.Amount++;
+                _ = context._drinkEntries.Update(drinkToUpdate) ?? throw new KeyNotFoundException("Could not find User");
+                context.SaveChanges();
+            }
+        }
+
+        private bool FindDrinkInDatabase(string name)
+        {
+            using (var context = new DbContext(_options, ServiceLifetime.Scoped))
+            {
+                drink drinkFromDatabase = context._drinkEntries.Where(x => x.Name == name).ToList().FirstOrDefault();
+
+                if (drinkFromDatabase != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        #endregion
     }
 }
