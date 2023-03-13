@@ -20,6 +20,8 @@ var mapper = new MapperConfiguration(config =>
     config.CreateMap<DrinkDTO, drink>();
 }).CreateMapper();
 
+builder.Services.AddSingleton(mapper);
+
 Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
 Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
 

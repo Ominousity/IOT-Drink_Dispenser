@@ -1,9 +1,8 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
-using Domain;
 using FluentValidation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace BarAPI.Controllers
 {

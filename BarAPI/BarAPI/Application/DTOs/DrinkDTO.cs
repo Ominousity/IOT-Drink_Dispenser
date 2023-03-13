@@ -9,7 +9,7 @@ namespace Application.DTOs
     public class DrinkDTO
     {
         public string Name { get; set; }
-        public float SodaCL { get; set; }
-        public float AlcCL { get; set; }
+        public double SodaCL { get; set; }
+        public double AlcCL { get; set; }
     }
 }

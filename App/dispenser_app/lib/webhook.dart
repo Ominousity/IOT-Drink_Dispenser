@@ -5,12 +5,12 @@ import 'dart:convert';
 class Webhook {
 
   Future<void> SendDrink(String name, String alcCl) async {
-    int cupVolume = 10;
+    double cupVolume = 10.0;
     String soda;
     if (name.contains("Shot")){
       soda = "0";
     }else {
-      int.parse(alcCl) - cupVolume;
+      cupVolume = cupVolume - double.parse(alcCl);
       soda = "$cupVolume";
     }
     final response = await http.post(
