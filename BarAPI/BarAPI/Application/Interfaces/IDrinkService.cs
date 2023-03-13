@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.DTOs;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Application.Interfaces
 {
     public interface IDrinkService
     {
-        public void DespenseDrink(drink drink);
+        public void DespenseDrink(DrinkDTO drinkDTO);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Domain;
+﻿using Application.DTOs;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Validators
 {
-    public class DrinkValidator : AbstractValidator<drink>
+    public class DrinkValidator : AbstractValidator<DrinkDTO>
     {
         public DrinkValidator()
         {

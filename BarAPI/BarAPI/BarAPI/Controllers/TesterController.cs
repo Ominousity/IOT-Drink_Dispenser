@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
@@ -19,11 +20,11 @@ namespace BarAPI.Controllers
 
         [HttpPost]
         [Route("test")]
-        public ActionResult TestDespenseDrink(drink drink) {
+        public ActionResult TestDespenseDrink(DrinkDTO drinkDTO) {
 
             try
             {
-                _drinkService.DespenseDrink(drink);
+                _drinkService.DespenseDrink(drinkDTO);
                 return Ok();
             } catch(ValidationException e)
             {

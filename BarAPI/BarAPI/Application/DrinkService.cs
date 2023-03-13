@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using FluentValidation;
 using System;
@@ -12,21 +14,23 @@ namespace Application
     public class DrinkService : IDrinkService
     {
         private IDrinkRepository _drinkRepository;
-        private IValidator<drink> validator;
+        private IValidator<DrinkDTO> _validator;
+        private IMapper _mapper;
 
-        public DrinkService(IDrinkRepository drinkRepository, IValidator<drink> validator)
+        public DrinkService(IDrinkRepository drinkRepository, IValidator<DrinkDTO> validator, IMapper mapper)
         {
             _drinkRepository = drinkRepository;
-            this.validator = validator;
+            _validator = validator;
+            _mapper = mapper;
         }
 
-        public void DespenseDrink(drink drink)
+        public void DespenseDrink(DrinkDTO drinkDTO)
         {
-            var validation = validator.Validate(drink);
+            var validation = _validator.Validate(drinkDTO);
             if (!validation.IsValid)
                 throw new ValidationException(validation.ToString());
-
-            _drinkRepository.DespenseDrink(drink);
+            drink drinkMap = _mapper.Map<drink>(drinkDTO);
+            _drinkRepository.DespenseDrink(drinkMap);
         }
     }
 }

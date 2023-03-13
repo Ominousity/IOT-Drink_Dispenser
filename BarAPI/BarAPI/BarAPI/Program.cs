@@ -1,3 +1,4 @@
+using Application.DTOs;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -13,6 +14,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
+var mapper = new MapperConfiguration(config =>
+{
+    config.CreateMap<DrinkDTO, drink>();
+}).CreateMapper();
 
 Infrastructure.DependencyResolver.DependencyResolverService.RegisterInfrastructureLayer(builder.Services);
 Application.DependencyResolver.DependencyResolverService.RegisterApplicationLayer(builder.Services);
