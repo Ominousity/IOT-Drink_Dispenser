@@ -147,7 +147,8 @@ void OfllineDespenseCode(void * parameter){
 
 void testDrinkDespenser(){
   digitalWrite(greenLight, LOW);
-  if (value1 <= 0.4){
+  Serial.println(value1);
+    if (value1 <= 0.4){
     for (int i = 0; i <= 7; i++) {
       digitalWrite(yellowLight, HIGH);
       delay(250);
