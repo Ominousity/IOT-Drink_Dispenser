@@ -6,6 +6,7 @@ using MQTTnet;
 using MQTTnet.Client;
 using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -38,7 +39,7 @@ namespace Infrastructure
 
                 var applicationMessage = new MqttApplicationMessageBuilder()
                     .WithTopic("Bar/Tester")
-                    .WithPayload("{value1:" + drink.AlcCL + ",value2:" + drink.SodaCL + "}")
+                    .WithPayload("{value1:" + drink.AlcCL.ToString(CultureInfo.GetCultureInfo("en-GB")) + ",value2:" + drink.SodaCL.ToString(CultureInfo.GetCultureInfo("en-GB")) + "}")
                     .Build();
 
                 await mqttClient.PublishAsync(applicationMessage, CancellationToken.None);

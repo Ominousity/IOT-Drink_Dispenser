@@ -3,11 +3,7 @@ using Application.Interfaces;
 using AutoMapper;
 using Domain;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Application
 {
@@ -28,8 +24,12 @@ namespace Application
         {
             var validation = _validator.Validate(drinkDTO);
             if (!validation.IsValid)
+            {
                 throw new ValidationException(validation.ToString());
+            }
             drink drinkMap = _mapper.Map<drink>(drinkDTO);
+            Console.WriteLine(drinkMap.AlcCL.ToString(CultureInfo.GetCultureInfo("en-GB")));
+            Console.WriteLine(drinkMap.SodaCL.ToString(CultureInfo.GetCultureInfo("en-GB")));
             _drinkRepository.DespenseDrink(drinkMap);
         }
     }
