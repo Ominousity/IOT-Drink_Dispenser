@@ -73,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void SendDrink(){
-    if (num.parse(textController.text) >= 0.5 && num.parse(textController.text) <= 4.0 && textController.text != null){
-      webhook.SendDrink(selectedDrink!.label, textController.text);
+    if (num.parse(textController.text) >= 0.4 && num.parse(textController.text) <= 10.0){
+      webhook.SendDrink(selectedDrink!.label, num.parse(textController.text));
       
     }
     
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       controller: textController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Centiliter Alcohol -- Min 0.5cl | Max 4cl'
+                        labelText: 'Centiliter Alcohol -- Min 0.5cl | Max 10cl'
                       ),
                     ),
           ),
