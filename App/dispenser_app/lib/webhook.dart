@@ -5,13 +5,11 @@ import 'dart:math';
 class Webhook {
 
   Future<void> SendDrink(String name, num alcCl) async {
-    num cupVolume = VolumeCalc().Calculator(30) + 0.3;
+    num cupVolume = 30;
     num soda;
     if (name.contains("Shot")){
       soda = 0;
-      alcCl = VolumeCalc().Calculator(alcCl);
     }else {
-      alcCl = VolumeCalc().Calculator(alcCl);
       cupVolume = cupVolume - alcCl;
       soda = cupVolume;
     }
@@ -30,13 +28,4 @@ class Webhook {
     print(soda);
     print(response.statusCode);
   } 
-}
-
-class VolumeCalc{
-
-  num Calculator(num x){
-      num y = 0.36 * x + 0.31;
-      return y;
-  }
-
 }
