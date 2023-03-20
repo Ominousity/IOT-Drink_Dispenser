@@ -13,7 +13,7 @@ namespace Application.Validators
         public DrinkValidator()
         {
             RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.AlcCL).GreaterThan(0.4f);
+            RuleFor(x => x.AlcCL).GreaterThan(0.1f);
         }
     }
 }
