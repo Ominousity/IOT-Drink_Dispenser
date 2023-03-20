@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void SendDrink(){
-    if (num.parse(textController.text) >= 0.4 && num.parse(textController.text) <= 10.0){
+    if (num.parse(textController.text) >= 0.4 && num.parse(textController.text) <= 20.0){
       webhook.SendDrink(selectedDrink!.label, num.parse(textController.text));
       
     }
