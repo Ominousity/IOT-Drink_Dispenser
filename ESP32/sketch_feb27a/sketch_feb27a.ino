@@ -1,27 +1,31 @@
 #include <WiFi.h>
-#include <Wire.h>
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 
+//Pin Setup
 int pump1 = 14;
 int pump2 = 13;
 int button = 17;
 int redLight = 12;
 int yellowLight = 4;
 int greenLight = 16;
+
+//Despinser Values
 double value1;
 double value2;
 
+//MultiThreading
 TaskHandle_t OfflineDespense;
 StaticJsonBuffer<200> jsonBuffer;
 
+//WIFI
+WiFiClient espClient;
 const char* ssid = "Jj 5G";
 const char* pass = "adhf0975";
 
-const char* mqtt_server = "mqtt.flespi.io";
-
-WiFiClient espClient;
+//Flespi / JSON
 PubSubClient client(espClient);
+const char* mqtt_server = "mqtt.flespi.io";
 long lastMsg = 0;
 char msg[50];
 int value = 0;
@@ -76,15 +80,12 @@ void callback(char* topic, byte* message, unsigned int length) {
     messageTemp[i] = (char)message[i];
   }
   Serial.println();
-  // Feel free to add more if statements to control more GPIOs with MQTT
   JsonObject& root = jsonBuffer.parseObject(messageTemp);
   if (!root.success()){
     Serial.println("Failed to pass to Json");
   }
   value1 = root["value1"];
   value2 = root["value2"];
-  // If a message is received on the topic esp32/output, you check if the message is either "on" or "off". 
-  // Changes the output state according to the message
   if (String(topic) == "Bar/Tester") {
     testDrinkDespenser();      
   }
@@ -131,10 +132,6 @@ void loop() {
   if (now - lastMsg > 5000) {
     lastMsg = now;
   }
-}
-
-void despenseDrink(){
-  
 }
 
 void OfllineDespenseCode(void * parameter){
